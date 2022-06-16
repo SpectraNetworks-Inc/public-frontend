@@ -1,25 +1,20 @@
 <template>
-  <HelloWorld msg="Hello"/>
+<router-view></router-view>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
 
+
+
+<script>
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+  name: 'App'
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import 'assets/css/@tabler/core/dist/css/tabler.css';
+@import 'assets/css/@tabler/core/dist/css/tabler-flags.css';
+@import 'assets/css/@tabler/core/dist/css/tabler-payments.css';
+@import 'assets/css/@tabler/core/dist/css/tabler-vendors.css';
+
 </style>
