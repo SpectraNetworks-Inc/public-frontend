@@ -51,19 +51,9 @@
 
 
 <script>
-import axios from 'axios';
 
 export default {
-  name: 'NavBarComponent',
-    created() {
-    axios.get(`http://jsonplaceholder.typicode.com/posts`)
-    .then(response => {
-      console.log(response.data)
-    })
-    .catch(e => {
-      console.log(e)
-    })
-  }
+  name: 'NavBarComponent'
 
 }
 </script>

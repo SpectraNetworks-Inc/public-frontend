@@ -12,18 +12,19 @@
           </h1>
           <div class="navbar-nav flex-row order-md-last">
             <div class="nav-item d-none d-md-flex me-3">
-              <div class="btn-list">
+              <div v-if="loggedIn == false" class="btn-list">
+                <a class="btn btn-outline-success" href="/login">Login</a>
+                <a class="btn btn-outline-warning" href="/signup">Sign up</a>
+
               </div>
             </div>
-            <div class="nav-item dropdown">
+            <div v-if="loggedIn == true" class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                 <div class="d-none d-xl-block ps-2">
                   <div>John Doe</div>
-                  <div class="mt-1 small text-muted">Test User</div>
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="#" class="dropdown-item">Set status</a>
                 <a href="#" class="dropdown-item">Profile &amp; account</a>
                 <a href="#" class="dropdown-item">Feedback</a>
                 <div class="dropdown-divider"></div>
@@ -41,7 +42,27 @@
 
 
 <script>
+// import { HTTP } from '../http-common.js'
+
 export default {
-  name: 'HeaderComponent'
+  name: 'HeaderComponent',
+  data() {
+    return {
+      loggedIn: false
+    }
+  },
+  created() {
+    const Cli = this.$cookies.get('loggedIn');
+
+    if (Cli) {
+      if (Cli == 'true') {
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
+    } else {
+      this.loggedIn = false;
+    }
+  }
 }
 </script>

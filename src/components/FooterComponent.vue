@@ -18,10 +18,12 @@
 </template>
 
 <script>
+import dateFormat from 'dateformat';
+
 export default {
   data() {
     return {
-      date: new Date()
+      date: dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT")
     }
   },
   name: 'FooterComponent'
