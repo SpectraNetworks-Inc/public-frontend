@@ -5,38 +5,38 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3 user-select-none">
-        <a href="https://dashboard.spectranetworks.ca">SCI</a>
+      <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3 user-select-none antialiased">
+        <a href="https://dashboard.spectranetworks.ca" style="text-decoration: none;">SCI</a>
       </h1>
 
       <div class="navbar-nav flex-row order-md-last">
         <div class="nav-item d-md-flex me-3">
           <div v-if="loggedIn == false" class="btn-list">
-            <a class="btn btn-outline-success user-select-none" href="/login">Login</a>
-            <a class="btn btn-outline-warning user-select-none" href="/signup">Sign up</a>
+            <a class="btn btn-outline-success user-select-none antialiased" href="/login">Login</a>
+            <a class="btn btn-outline-warning user-select-none antialiased" href="/signup">Sign up</a>
           </div>
         </div>
 
 
         <div v-if="loggedIn == true" class="nav-item dropdown">
           <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-            <span class="avatar avatar-sm" style="background-image: url(../assets/icons/user.png)"></span>
+            <span class="avatar avatar-sm" :style="userImage"></span>
             <div class="d-none d-xl-block ps-2">
-              <div class="user-select-none">John Doe</div>
+              <div class="user-select-none antialiased">{{ userName }}</div>
             </div>
           </a>
 
           <div v-if="loggedIn == true" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-            <a href="#" class="dropdown-item">Profile &amp; account</a>
-            <a href="#" class="dropdown-item">Feedback</a>
+            <a href="#" class="dropdown-item antialiased">Profile &amp; account</a>
+            <a href="#" class="dropdown-item antialiased">Feedback</a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">Settings</a>
-            <a href="#" class="dropdown-item">Logout</a>
+            <a href="#" class="dropdown-item antialiased">Settings</a>
+            <a href="#" class="dropdown-item antialiased">Logout</a>
           </div>
 
           <div v-if="loggedIn == false" class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-            <a href="#" class="dropdown-item">Login</a>
-            <a href="#" class="dropdown-item">Sign Up</a>
+            <a href="#" class="dropdown-item antialiased">Login</a>
+            <a href="#" class="dropdown-item antialiased">Sign Up</a>
           </div>
           
         </div>
@@ -54,12 +54,13 @@ export default {
   name: 'HeaderComponent',
   data() {
     return {
-      loggedIn: false
+      loggedIn: false,
+      userImage: { backgroundImage: "url('/icons/user.png')" },
+      userName: 'John Doe'
     }
   },
   created() {
     const Cli = this.$cookies.get('loggedIn');
-
     if (Cli) {
       if (Cli == 'true') {
         this.loggedIn = true;
@@ -69,6 +70,7 @@ export default {
     } else {
       this.loggedIn = false;
     }
+
   }
 }
 </script>
