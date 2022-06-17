@@ -7,8 +7,8 @@
               </div>
               <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                 <ul class="list-inline list-inline-dots mb-0">
-                  <li class="list-inline-item">Copyright © 2022 <a href="https://spectranetworks.ca" class="link-secondary">SCI</a>. All rights reserved.</li>
-                  <li class="list-inline-item">Generated {{ date }}</li>
+                  <li class="list-inline-item user-select-none">Copyright © 2022 <a href="https://spectranetworks.ca" class="link-secondary">SCI</a>. All rights reserved.</li>
+                  <li class="list-inline-item user-select-none">Generated {{ date }}</li>
                 </ul>
               </div>
             </div>

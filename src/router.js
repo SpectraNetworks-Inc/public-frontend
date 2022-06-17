@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import RootPage from './pages/HomePage.vue';
 import HomePage from './pages/HomePage.vue';
 import TestPage from './pages/TestPage.vue';
+import DashboardHomePage from './pages/dashboard/Home/DashboardHomePage.vue';
+import DashboardPage from './pages/dashboard/DashboardPage.vue';
 
 import NotFound from './pages/errors/404Page.vue'
 
@@ -26,7 +28,19 @@ const routes = [
     path: "/:catchAll(.*)",
     name: "NotFound",
     component: NotFound,
-}
+  },
+  {
+    path: "/dashboard",
+    name: "DashboardPage",
+    component: DashboardPage,
+    children: [
+      {
+        path: "home",
+        name: "DashboardHomePage",
+        component: DashboardHomePage
+      }
+    ]
+  }
 ];
 
 const router = createRouter({
