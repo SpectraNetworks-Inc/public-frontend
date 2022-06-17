@@ -12,7 +12,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Email address</label>
-                        <input type="email" class="form-control" placeholder="Enter email">
+                        <input type="email" class="form-control" placeholder="Enter email" name="email" id="email">
                     </div>
 
                     <div class="form-footer">
