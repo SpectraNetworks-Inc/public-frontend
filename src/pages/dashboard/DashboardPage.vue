@@ -7,13 +7,15 @@
     <div class="page-header d-print-none">
       <div class="row g-2 align-items-center">
         <div class="col">
-          <h2 class="page-title user-select-none">Home</h2>
+            <div class="page-pretitle user-select-none">Overview</div>
+          <h2 class="page-title user-select-none">Dashboard Home</h2>
         </div>
       </div>
     </div>
   </div>
   <div class="page-body">
     <div class="container-xl">
+        <router-view></router-view>
 
     </div>
   </div>
@@ -25,9 +27,9 @@
 
 
 <script>
-import HeaderComponent from '../components/HeaderComponent.vue'
-import NavBarComponent from '../components/NavBarComponent.vue'
-import FooterComponent from '../components/FooterComponent.vue'
+import HeaderComponent from '../../components/HeaderComponent.vue'
+import NavBarComponent from '../../components/NavBarComponent.vue'
+import FooterComponent from '../../components/FooterComponent.vue'
 
 export default {
   name: 'RootPage',
