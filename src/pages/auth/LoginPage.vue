@@ -112,6 +112,9 @@ export default {
 
         }).catch(error => {
           switch (error.response.status) {
+            case 401:
+              this.error = error.response.data.message;
+              break;
             case 404:
               this.error = error.response.data.message;
               break;
