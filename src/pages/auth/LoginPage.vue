@@ -4,13 +4,13 @@
             <div class="text-center mb-4">
                 <a href="." class="navbar-brand navbar-brand-autodark user-select-none" style="text-decoration: none;"><img src="" alt="" height="36">SCI</a>
             </div>
-            <form class="card card-md" action="https://en1q285rsuhcbv2.m.pipedream.net" method="GET" autocomplete="off">
+            <form @submit="submitForm" class="card card-md">
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4 user-select-none">Login to your account</h2>
 
                     <div class="mb-3">
                         <label class="form-label user-select-none">Email address</label>
-                        <input type="email" class="form-control" placeholder="Enter email" autocomplete="off" name="email" id="email">
+                        <input v-model="email" type="email" data-form-type="email" class="form-control" placeholder="Enter email" name="email" id="email">
                     </div>
 
                     <div class="mb-2">
@@ -21,14 +21,26 @@
                         </label>
 
                         <div class="input-group input-group-flat">
-                            <input type="password" class="form-control" placeholder="Password" autocomplete="off" name="password" id="password">
+                            <input :type="showPassword" v-model="password" data-form-type="password" class="form-control" placeholder="Password" name="password" id="password">
                             <span class="input-group-text">
-                                <a href="#" class="link-secondary" data-bs-toggle="tooltip">
+                                <a @click="switchVisibility" class="link-secondary" data-bs-toggle="tooltip">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="2"></circle><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path></svg>
                                 </a>
                             </span>
                         </div>
 
+                    </div>
+
+                    <div v-show="error">
+                        <div class="alert alert-danger">
+                            <strong>{{error}}</strong>
+                        </div>
+                    </div>
+
+                    <div v-show="success">
+                        <div class="alert alert-success">
+                            <strong>{{success}}</strong>
+                        </div>
                     </div>
 
                     <div class="mb-2">
@@ -42,25 +54,6 @@
                     </div>
                 </div>
 
-                <div class="hr-text user-select-none">or</div>
-                <div class="card-body">
-                    <div class="row">
-
-                        <div class="col">
-                            <a href="#" class="btn btn-white w-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path></svg>
-                                Login with Github
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="btn btn-white w-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path></svg>
-                                Login with Twitter
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
             </form>
             <div class="text-center text-muted mt-3 user-select-none">Don't have account yet? <a href="/signup" tabindex="-1">Sign up</a>
             </div>
@@ -73,25 +66,82 @@
 
 <script>
 import FooterComponent from '../../components/FooterComponent.vue'
+import { HTTP } from '../../http-common.js' 
 
 export default {
   name: 'LoginPage',
   components: {
     FooterComponent
   },
-  created() {
-    const Cli = this.$cookies.get('loggedIn');
-    if (Cli) {
-      if (Cli == 'true') {
-        this.$router.push('/dashboard');
-        this.loggedIn = true;
-      } else {
-        this.loggedIn = false;
-      }
-    } else {
-      this.loggedIn = false;
-    }
+    data() {
+        return {
+        showPassword: "password",
+        email: '',
+        password: '',
+        success: '',
+        error: ''
+        }
+    },
+    methods:{
+        switchVisibility() {
+            this.showPassword = this.showPassword === "password" ? "text" : "password";
+    },
+    submitForm: function (e) {
+      e.preventDefault();
+      if (this.email) {
+        HTTP.post('v1/auth/login', {
+          email: this.email,
+          password: this.password
+        }).then(response => {
+          console.log(response);
+          switch (response.status) {
+            case 200:
+              this.success = 'Logged In successfully';
+              this.$cookies.set('accessToken', response.data.tokens.access.token, response.data.tokens.access.expires);
+              this.$cookies.set('refreshToken', response.data.tokens.refresh.token, response.data.tokens.refresh.expires);
+              this.$cookies.set('userName', response.data.user.name);
+              this.$cookies.set('userEmail', response.data.user.email);
+              this.$cookies.set('userId', response.data.user.id);
+              this.$cookies.set('loggedIn', true);
+              console.log(this.success);
+              setTimeout(() => {
+                this.$router.push('/dashboard');
+              }, 3000);
+              break;
+          }
 
-  }
+        }).catch(error => {
+          switch (error.response.status) {
+            case 404:
+              this.error = error.response.data.message;
+              break;
+            case 500:
+              this.error = error.response.data.message;
+              break;
+          }
+        })
+        return true;
+      }
+      if (!this.email) {
+        this.error = 'Please enter your email';
+        }
+      if (!this.password) {
+        this.error = 'Please enter your password';
+        }
+    },
+    },
+    created() {
+        const Cli = this.$cookies.get('loggedIn');
+        if (Cli) {
+            if (Cli == 'true') {
+                this.$router.push('/dashboard');
+                this.loggedIn = true;
+                } else {
+                    this.loggedIn = false;
+                }
+                } else {
+                    this.loggedIn = false;
+                }
+            }
 }
 </script>
