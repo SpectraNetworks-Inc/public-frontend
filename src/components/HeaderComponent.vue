@@ -4,8 +4,8 @@ import { useLogto } from "@logto/vue";
 // eslint-disable-next-line
 const { signIn, isAuthenticated, signOut } = useLogto();
 // eslint-disable-next-line
-const onClickSignIn = () => signIn('https://tyree-z-spectranetworks-inc-public-frontend-6jq9wjvxcxxpj-8080.githubpreview.dev/callback');
-const onClickSignOut = () => signOut('https://tyree-z-spectranetworks-inc-public-frontend-6jq9wjvxcxxpj-8080.githubpreview.dev/logout');
+const onClickSignIn = () => signIn('https://dashboard.spectranetworks.ca/callback');
+const onClickSignOut = () => signOut('https://dashboard.spectranetworks.ca/logout');
 
 
 </script>
