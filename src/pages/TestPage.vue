@@ -1,8 +1,16 @@
+<script setup>
+import { useLogto } from "@logto/vue";
+
+// eslint-disable-next-line
+const { isAuthenticated } = useLogto();
+</script>
+
+
 <template>
 <HeaderComponent/>
 <NavBarComponent/>
 
-<div class="page-wrapper">
+<div v-if="isAuthenticated" class="page-wrapper">
   <div class="container-xl">
     <div class="page-header d-print-none">
       <div class="row g-2 align-items-center">
@@ -42,6 +50,20 @@
   </div>
   <FooterComponent/>
 </div>
+
+<div v-else class="page-wrapper">
+  <div class="container-xl">
+    <div class="page-header d-print-none">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <h2 class="page-title">Unauthorized</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 </template>
 

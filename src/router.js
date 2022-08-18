@@ -2,12 +2,10 @@ import { createRouter, createWebHistory } from "vue-router";
 import RootPage from './pages/HomePage.vue';
 import HomePage from './pages/HomePage.vue';
 import TestPage from './pages/TestPage.vue';
+import CallbackPage from './pages/auth/CallbackPage.vue';
 import DashboardHomePage from './pages/dashboard/Home/DashboardHomePage.vue';
 import DashboardPage from './pages/dashboard/DashboardPage.vue';
-import LoginPage from './pages/auth/LoginPage.vue';
-import SignUpPage from './pages/auth/SignUpPage.vue';
-import ForgotPage from './pages/auth/ForgotPage.vue';
-import LogOutPage from './pages/auth/LogoutPage.vue';
+import LogoutPage from './pages/auth/LogoutPage.vue';
 
 import NotFound from './pages/errors/404Page.vue'
 
@@ -19,29 +17,19 @@ const routes = [
     component: RootPage
   },
   {
+    path: '/callback',
+    name: 'CallbackPage',
+    component: CallbackPage,
+  },
+  {
+    path: '/logout',
+    name: 'LogoutPage',
+    component: LogoutPage,
+  },
+  {
     path: "/home",
     name: "HomePage",
     component: HomePage
-  },
-  {
-    path: "/login",
-    name: "LoginPage",
-    component: LoginPage
-  },
-  {
-    path: "/signup",
-    name: "SignUpPage",
-    component: SignUpPage
-  },
-  {
-    path: "/forgot",
-    name: "ForgotPage",
-    component: ForgotPage
-  },
-  {
-    path: "/logout",
-    name: "LogOutPage",
-    component: LogOutPage
   },
   {
     path: "/test",
