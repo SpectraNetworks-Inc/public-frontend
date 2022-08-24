@@ -12,7 +12,6 @@ const config = {
 
 const app = createApp(App);
 
-
 app.use(router);
 router.app = app;
 

@@ -9,11 +9,14 @@
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs-pro": "^3.6.3",
+    "@logto/js": "^1.0.0-beta.2",
     "@logto/vue": "^1.0.0-beta.2",
     "@tabler/core": "^1.0.0-beta9",
     "core-js": "^3.8.3",
     "dateformat": "^5.0.3",
+    "md5": "^2.3.0",
     "vue": "^3.2.13",
+    "vue-cookies": "^1.8.1",
     "vue3-cookies": "^1.0.6"
   },
   "devDependencies": {

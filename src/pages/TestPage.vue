@@ -73,7 +73,7 @@ const { isAuthenticated } = useLogto();
 import HeaderComponent from '../components/HeaderComponent.vue'
 import NavBarComponent from '../components/NavBarComponent.vue'
 import FooterComponent from '../components/FooterComponent.vue'
-import { HTTP } from '../http-common.js'
+import { AUTH } from '../http-common.js'
 
 export default {
   name: 'TestPage',
@@ -90,7 +90,7 @@ export default {
     }
   },
   created() {
-    HTTP.get(`users`)
+    AUTH.get(`api/status`)
     .then(response => {
       this.users = response.data
     })
