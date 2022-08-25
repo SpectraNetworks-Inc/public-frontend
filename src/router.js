@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { authGuard } from '@auth0/auth0-vue';
 import RootPage from './pages/HomePage.vue';
 import HomePage from './pages/HomePage.vue';
 import TestPage from './pages/TestPage.vue';
@@ -34,7 +35,8 @@ const routes = [
   {
     path: "/test",
     name: "TestPage",
-    component: TestPage
+    component: TestPage,
+    beforeEnter: authGuard
   },
   {
     path: "/:catchAll(.*)",
@@ -45,6 +47,7 @@ const routes = [
     path: "/dashboard",
     name: "DashboardPage",
     component: DashboardPage,
+    beforeEnter: authGuard,
     children: [
       {
         path: "home",
