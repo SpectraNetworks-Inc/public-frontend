@@ -85,9 +85,12 @@ export default {
     },
     created() {
 
+    },
+    mounted() {
       this.getuserInfo().then((res)=> {
         this.userinfo = res
       })
+      
     }
 }
 </script>
