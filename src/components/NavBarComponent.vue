@@ -1,8 +1,8 @@
 <script setup>
-import { useLogto } from "@logto/vue";
+  import { useAuth0 } from '@auth0/auth0-vue';
 
 // eslint-disable-next-line
-const { signIn, isAuthenticated, signOut } = useLogto();
+const { isAuthenticated } = useAuth0();
 </script>
 
 

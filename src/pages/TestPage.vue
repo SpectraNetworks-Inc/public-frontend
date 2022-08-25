@@ -1,11 +1,3 @@
-<script setup>
-import { useLogto } from "@logto/vue";
-
-// eslint-disable-next-line
-const { isAuthenticated } = useLogto();
-</script>
-
-
 <template>
 <HeaderComponent/>
 <NavBarComponent/>
@@ -15,7 +7,7 @@ const { isAuthenticated } = useLogto();
     <div class="page-header d-print-none">
       <div class="row g-2 align-items-center">
         <div class="col">
-          <h2 class="page-title">Test Data [https://jsonplaceholder.typicode.com/users]</h2>
+          <h2 class="page-title">Test Data</h2>
         </div>
       </div>
     </div>
@@ -24,24 +16,7 @@ const { isAuthenticated } = useLogto();
     <div class="container-xl">
       <div class="card">
         <div class="card-body">
-          <div id="table-default">
-            <table class="table" v-if="users && users.length">
-              <thead>
-                <tr>
-                  <th><button class="table-sort" data-sort="sort-name">Name</button></th>
-                  <th><button class="table-sort" data-sort="sort-email">Email</button></th>
-                  <th><button class="table-sort" data-sort="sort-city">City</button></th>
-                </tr>
-              </thead>
-              <tbody class="table-tbody">
-                <tr v-for="user in users" :key="user">
-                  <td class="sort-name">{{user.name}}</td>
-                  <td class="sort-email">{{user.email}}</td>
-                  <td class="sort-city">{{user.address.city}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <code>{{ userinfo }}</code>
         </div>
       </div>
 
@@ -73,7 +48,7 @@ const { isAuthenticated } = useLogto();
 import HeaderComponent from '../components/HeaderComponent.vue'
 import NavBarComponent from '../components/NavBarComponent.vue'
 import FooterComponent from '../components/FooterComponent.vue'
-import { AUTH } from '../http-common.js'
+import { useAuth0 } from '@auth0/auth0-vue';
 
 export default {
   name: 'TestPage',
@@ -86,17 +61,34 @@ export default {
   data() {
     return {
       users: [],
-      errors: []
+      errors: [],
+      userinfo: ''
     }
   },
-  created() {
-    AUTH.get(`api/status`)
-    .then(response => {
-      this.users = response.data
-    })
-    .catch(e => {
-      this.errors.push(e)
-    })
-  }
+  setup() {
+    const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+    const getuserInfo = async () => {
+          const token = await getAccessTokenSilently();
+          const response = await fetch('https://spectranetworks.us.auth0.com/userinfo', {
+            headers: {
+              Authorization: 'Bearer ' + token
+            }
+          });
+          const data = await response.json()
+          return data
+        }
+
+    return {
+        user,
+        isAuthenticated,
+        getuserInfo
+      };
+    },
+    created() {
+
+      this.getuserInfo().then((res)=> {
+        this.userinfo = res
+      })
+    }
 }
 </script>
