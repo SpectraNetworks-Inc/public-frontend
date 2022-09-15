@@ -11,7 +11,7 @@
     "@auth0/auth0-vue": "^1.0.2",
     "@fingerprintjs/fingerprintjs-pro": "^3.7.1",
     "@logto/js": "^1.0.0-beta.2",
-    "@logto/vue": "^1.0.0-beta.2",
+    "@logto/vue": "^1.0.0-beta.5",
     "@tabler/core": "^1.0.0-beta11",
     "core-js": "^3.25.1",
     "dateformat": "^5.0.3",
