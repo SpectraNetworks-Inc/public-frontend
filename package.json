@@ -28,7 +28,7 @@
     "@vue/cli-service": "~5.0.8",
     "axios": "^0.27.2",
     "eslint": "^8.23.1",
-    "eslint-plugin-vue": "^9.4.0",
+    "eslint-plugin-vue": "^9.5.1",
     "vue-router": "^4.1.5"
   },
   "eslintConfig": {
