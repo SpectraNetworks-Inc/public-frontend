@@ -7,20 +7,14 @@ export default {
       return {
         name: '',
         username: '',
-        avatarURL: ''
+        avatarURL: '',
+        darkMode: false
       }
     },
     setup() {
       
       const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 
-      if (localStorage.getItem('theme')) {
-        document.body.className = localStorage.getItem('theme')
-      } else {
-        document.body.className = 'theme-light'
-        localStorage.setItem('theme', 'theme-light')
-      }
-      
       return {
         login: () => {
           loginWithRedirect();
@@ -32,6 +26,37 @@ export default {
         isAuthenticated,
       };
     },
+    mounted() {
+      let theme = localStorage.getItem("theme");
+      if (theme === 'theme-dark') {
+        document.body.className = 'theme-dark'
+        this.darkMode = true
+      } else {
+        document.body.className = 'theme-light'
+        this.darkMode = false
+      }
+    },
+    watch: {
+      darkMode: function () {
+        if (this.darkMode == true) {
+          localStorage.setItem("theme", 'theme-dark');
+          document.body.className = 'theme-dark'
+        } else {
+          localStorage.setItem("theme", 'theme-light');
+          document.body.className = 'theme-light'
+        }
+      }
+    },
+    methods: {
+      changeThemeLight: function() {
+        this.darkMode = false
+
+      },
+      changeThemeDark: function() {
+        this.darkMode = true
+
+      }
+    },
     computed: {
     getImageUrl: function() {
         return this.user.picture
@@ -42,16 +67,6 @@ export default {
     getUserName: function() {
         return this.user.nickname
     },
-    changeThemeLight: function() {
-      document.body.className = 'theme-light'
-      localStorage.setItem('theme', 'theme-light')
-      return true
-    },
-    changeThemeDark: function() {
-      document.body.className = 'theme-dark'
-      localStorage.setItem('theme', 'theme-dark')
-      return true
-    }, 
   },
 };
 </script>
@@ -74,13 +89,16 @@ export default {
       </h1>
 
       <div class="navbar-nav flex-row order-md-last">
+        
         <div class="d-none d-md-flex">
-              <a @click="changeThemeDark" class="nav-link px-0 hide-theme-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable dark mode">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
-              </a>
-              <a @click="changeThemeLight" class="nav-link px-0 hide-theme-light" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable light mode">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="4"></circle><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path></svg>
-              </a>
+          
+          <a @click="changeThemeLight" v-if="darkMode" class="nav-link px-0" aria-label="Enable light mode">
+            <i class="ti ti-sun"></i>
+          </a>
+          <a @click="changeThemeDark" v-else class="nav-link px-0" aria-label="Enable dark mode">
+            <i class="ti ti-moon"></i>
+          </a>
+
               
             </div>
         <div class="nav-item d-md-flex me-3">
