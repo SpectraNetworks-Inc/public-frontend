@@ -33,9 +33,9 @@ export default {
               </div>
               <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                 <ul class="list-inline list-inline-dots mb-0">
-                  <li class="list-inline-item user-select-none antialiased">Copyright © 2022 <a href="https://spectranetworks.ca" class="link-secondary">SCI</a>. All rights reserved. v1.0.1</li>
-                  <li class="list-inline-item user-select-none antialiased">Generated: {{ date }}</li>
-                  <li class="list-inline-item user-select-none antialiased">BID: {{ bFP }}</li>
+                  <li class="list-inline-item user-select-none antialiased"><i class="ti ti-copyright"></i> 2022 <a href="https://spectranetworks.ca" class="link-secondary">SCI</a> v1.0.1</li>
+                  <li class="list-inline-item user-select-none antialiased"><i class="ti ti-hourglass-empty"></i> {{ date }}</li>
+                  <li class="list-inline-item user-select-none antialiased"><i class="ti ti-fingerprint"></i> {{ bFP }}</li>
                 </ul>
               </div>
             </div>
