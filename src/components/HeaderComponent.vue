@@ -8,13 +8,15 @@ export default {
         name: '',
         username: '',
         avatarURL: '',
-        darkMode: false
+        darkMode: false,
+        browserDarkMode: false
       }
     },
     setup() {
       
       const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 
+      
       return {
         login: () => {
           loginWithRedirect();
@@ -31,10 +33,20 @@ export default {
       if (theme === 'theme-dark') {
         document.body.className = 'theme-dark'
         this.darkMode = true
-      } else {
+      }
+
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.className = 'theme-dark'
+        this.darkMode = true
+        this.browserDarkMode = true
+      }
+
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
         document.body.className = 'theme-light'
         this.darkMode = false
+        this.browserDarkMode = false
       }
+
     },
     watch: {
       darkMode: function () {
@@ -67,6 +79,7 @@ export default {
     getUserName: function() {
         return this.user.nickname
     },
+    
   },
 };
 </script>
