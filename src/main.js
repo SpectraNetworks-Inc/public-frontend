@@ -7,6 +7,7 @@ import config from '@/config.js'
 
 const app = createApp(App);
 
+
 app.use(
   createAuth0({
     domain: config.auth0.domain,
