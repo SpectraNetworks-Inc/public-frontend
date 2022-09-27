@@ -1,20 +1,33 @@
 
 <script>
 import dateFormat from 'dateformat';
-import FingerprintJS from '@fingerprintjs/fingerprintjs-pro'
+import FingerprintJS from '@fingerprintjs/fingerprintjs-pro';
 
 export default {
   data() {
     return {
-      date: dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT"),
+      date: dateFormat(new Date(), "ddd, mmm dS, yyyy, h:MM:ss TT"),
       bFP: null,
+      appVersion: null,
+      gitHash: null,
+      commitLink: null
     }
   },
   created() {
     const fpPromise = FingerprintJS.load({ apiKey: 'w9sa26g60u9yqCcX2qEg' });
-    fpPromise
-    .then(fp => fp.get())
-    .then(result => this.bFP = result.visitorId)
+    // Globally Defined "gitInfo"
+    // eslint-disable-next-line
+    const GIT = gitInfo
+
+    if (GIT.dirty) {
+      this.appVersion = GIT.raw
+      this.commitLink = `https://github.com/SpectraNetworks-Inc/public-frontend/commit`
+
+    } else {
+      this.appVersion = GIT.hash
+      this.commitLink = `https://github.com/SpectraNetworks-Inc/public-frontend/commit/${GIT.hash}`
+      fpPromise.then(fp => fp.get()).then(result => this.bFP = result.visitorId)
+    }
 
   },
   name: 'FooterComponent'
@@ -33,9 +46,10 @@ export default {
               </div>
               <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                 <ul class="list-inline list-inline-dots mb-0">
-                  <li class="list-inline-item user-select-none antialiased"><i class="ti ti-copyright"></i> 2022 <a href="https://spectranetworks.ca" class="link-secondary">SCI</a> v1.0.1</li>
+                  <li class="list-inline-item user-select-none antialiased"><i class="ti ti-copyright"></i> 2022 <a style="text-decoration: none" href="https://spectranetworks.ca" class="link-secondary">SCI</a></li>
+                  <li v-if="appVersion" class="list-inline-item user-select-none antialiased"><i class="ti ti-git-commit"></i><a style="text-decoration: none" v-bind:href="commitLink" class="link-secondary">{{appVersion}}</a></li>
                   <li class="list-inline-item user-select-none antialiased"><i class="ti ti-hourglass-empty"></i> {{ date }}</li>
-                  <li class="list-inline-item user-select-none antialiased"><i class="ti ti-fingerprint"></i> {{ bFP }}</li>
+                  <li v-if="bFP" class="list-inline-item user-select-none antialiased"><i class="ti ti-fingerprint"></i> {{ bFP }}</li>
                 </ul>
               </div>
             </div>
@@ -43,3 +57,4 @@ export default {
         </footer>
 
 </template>
+

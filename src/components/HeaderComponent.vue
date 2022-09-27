@@ -33,19 +33,32 @@ export default {
       if (theme === 'theme-dark') {
         document.body.className = 'theme-dark'
         this.darkMode = true
-      }
-
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      } else if (theme === 'theme-light') {
         document.body.className = 'theme-dark'
-        this.darkMode = true
-        this.browserDarkMode = true
+        this.darkMode = false
+      } else {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.body.className = 'theme-dark'
+          this.darkMode = true
+          this.browserDarkMode = true
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.body.className = 'theme-light'
+          this.darkMode = false
+          this.browserDarkMode = false
+        }
       }
 
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        document.body.className = 'theme-light'
-        this.darkMode = false
-        this.browserDarkMode = false
-      }
+      // if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      //   document.body.className = 'theme-dark'
+      //   this.darkMode = true
+      //   this.browserDarkMode = true
+      // }
+
+      // if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      //   document.body.className = 'theme-light'
+      //   this.darkMode = false
+      //   this.browserDarkMode = false
+      // }
 
     },
     watch: {
@@ -58,6 +71,18 @@ export default {
           document.body.className = 'theme-light'
         }
       }
+      // browserDarkMode: function() {
+      //   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      //     document.body.className = 'theme-dark'
+      //     this.darkMode = true
+      //     this.browserDarkMode = true
+      //   }
+      //   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      //     document.body.className = 'theme-light'
+      //     this.darkMode = false
+      //     this.browserDarkMode = false
+      //   }
+      // }
     },
     methods: {
       changeThemeLight: function() {
