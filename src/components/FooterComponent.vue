@@ -18,16 +18,9 @@ export default {
     // Globally Defined "gitInfo"
     // eslint-disable-next-line
     const GIT = gitInfo
-
-    if (GIT.dirty) {
-      this.appVersion = GIT.raw
-      this.commitLink = `https://github.com/SpectraNetworks-Inc/public-frontend/commit`
-
-    } else {
-      this.appVersion = GIT.hash
-      this.commitLink = `https://github.com/SpectraNetworks-Inc/public-frontend/commit/${GIT.hash}`
-      fpPromise.then(fp => fp.get()).then(result => this.bFP = result.visitorId)
-    }
+    this.appVersion = GIT.hash
+    this.commitLink = `https://github.com/SpectraNetworks-Inc/public-frontend/commit/${GIT.hash}`
+    fpPromise.then(fp => fp.get()).then(result => this.bFP = result.visitorId)
 
   },
   name: 'FooterComponent'
