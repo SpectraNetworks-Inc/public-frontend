@@ -28,7 +28,7 @@
     "@vue/cli-service": "~5.0.8",
     "axios": "^0.27.2",
     "git-describe": "^4.0.4",
-    "semver": "^6.0.0",
+    "semver": "^7.3.8",
     "vue-cli-plugin-git-describe": "~1.0.0",
     "eslint": "^8.24.0",
     "eslint-plugin-vue": "^9.5.1",
