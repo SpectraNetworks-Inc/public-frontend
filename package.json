@@ -12,7 +12,7 @@
     "@fingerprintjs/fingerprintjs-pro": "^3.7.1",
     "@logto/js": "^1.0.0-beta.8",
     "@logto/vue": "^1.0.0-beta.5",
-    "@tabler/core": "^1.0.0-beta11",
+    "@tabler/core": "^1.0.0-beta14",
     "core-js": "^3.25.3",
     "dateformat": "^5.0.3",
     "md5": "^2.3.0",
